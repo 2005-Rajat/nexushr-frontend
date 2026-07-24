@@ -38,15 +38,16 @@ function Sidebar() {
       style={{
         width: "260px",
         height: "100vh",
-        background: "#494D5F",
+        background: "#0D0F1C",
         position: "fixed",
-        color: "#E5EAF5",
+        color: "#FFFFFF",
         padding: "25px",
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
-        boxShadow: "5px 0 30px rgba(0,0,0,0.2)",
-        zIndex: 10
+        boxShadow: "5px 0 30px rgba(0,0,0,0.4)",
+        zIndex: 10,
+        borderRight: "1px solid rgba(255,255,255,0.06)"
       }}
     >
       <div>
@@ -61,14 +62,14 @@ function Sidebar() {
             letterSpacing: "-0.5px"
           }}
         >
-          Nexus<span style={{ color: "#A0D2EB" }}>HR</span>
+          Nexus<span style={{ color: "#9333EA" }}>HR</span>
         </h2>
 
         <div
           style={{
             height: "4px",
             width: "60px",
-            background: "linear-gradient(90deg, #A0D2EB, #D0BDF4, #8458B3)",
+            background: "#9333EA",
             borderRadius: "999px",
             marginBottom: "35px"
           }}
@@ -80,20 +81,20 @@ function Sidebar() {
             alignItems: "center",
             gap: "15px",
             marginBottom: "35px",
-            background: "#3B3F52",
+            background: "#171A2B",
             padding: "12px",
             borderRadius: "16px",
-            border: "1px solid rgba(255,255,255,0.1)"
+            border: "1px solid rgba(255,255,255,0.08)"
           }}
         >
-          <FaUserCircle size={40} color="#A0D2EB" />
+          <FaUserCircle size={40} color="#9333EA" />
 
           <div>
-            <h6 style={{ margin: 0, fontFamily: "'Inter', sans-serif", fontWeight: 600, color: "#FFFFFF" }}>
+            <h6 style={{ margin: 0, fontFamily: "'Inter', sans-serif", fontWeight: 700, color: "#FFFFFF" }}>
               {user ? user.name : "Administrator"}
             </h6>
 
-            <small style={{ color: "#C4C7D6", fontSize: "12px", letterSpacing: "0.5px" }}>
+            <small style={{ color: "#9CA3AF", fontSize: "12px", letterSpacing: "0.5px", fontWeight: 600 }}>
               {user ? user.role : "ADMIN"}
             </small>
           </div>
@@ -116,24 +117,22 @@ function Sidebar() {
                 borderRadius: "12px",
                 marginBottom: "8px",
                 cursor: "pointer",
-                transition: "0.2s ease",
+                transition: "0.15s ease",
                 fontSize: "15px",
                 fontFamily: "'Inter', sans-serif",
-                fontWeight: isActive ? 700 : 500,
-                background: isActive ? "#8458B3" : "transparent",
-                color: isActive ? "#FFFFFF" : "#C4C7D6",
-                boxShadow: isActive ? "0 6px 16px rgba(132, 88, 179, 0.4)" : "none"
+                fontWeight: isActive ? 700 : 600,
+                background: isActive ? "#7C3AED" : "transparent",
+                color: "#FFFFFF",
+                boxShadow: isActive ? "0 6px 18px rgba(124, 58, 237, 0.45)" : "none"
               }}
               onMouseEnter={(e) => {
                 if (!isActive) {
-                  e.currentTarget.style.background = "#3B3F52";
-                  e.currentTarget.style.color = "#FFFFFF";
+                  e.currentTarget.style.background = "#7C3AED";
                 }
               }}
               onMouseLeave={(e) => {
                 if (!isActive) {
                   e.currentTarget.style.background = "transparent";
-                  e.currentTarget.style.color = "#C4C7D6";
                 }
               }}
             >
