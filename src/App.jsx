@@ -1,19 +1,7 @@
+import Login from "./pages/login"; // or "./pages/Login" if you renamed it
+
 function App() {
-  return (
-    <div
-      style={{
-        background: "red",
-        color: "white",
-        minHeight: "100vh",
-        fontSize: "40px",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      NexusHR is Working!
-    </div>
-  );
+  return <Login />;
 }
 
 export default App;
