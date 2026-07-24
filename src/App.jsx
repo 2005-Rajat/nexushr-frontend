@@ -1,22 +1,18 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-
-import Login from "./pages/login";
-import Dashboard from "./pages/Dashboard";
-import ComingSoon from "./pages/ComingSoon";
-
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/attendance" element={<ComingSoon />} />
-        <Route path="/payroll" element={<ComingSoon />} />
-        <Route path="/departments" element={<ComingSoon />} />
-        <Route path="/analytics" element={<ComingSoon />} />
-        <Route path="/settings" element={<ComingSoon />} />
-      </Routes>
-    </BrowserRouter>
+    <div
+      style={{
+        background: "red",
+        color: "white",
+        minHeight: "100vh",
+        fontSize: "40px",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      NexusHR is Working!
+    </div>
   );
 }
 
