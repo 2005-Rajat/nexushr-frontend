@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import Sidebar from "../components/Sidebar";
+import Sidebar, { SIDEBAR_WIDTH } from "../components/Sidebar";
 import Navbar from "../components/Navbar";
 import DashboardCards from "../components/DashboardCards";
 import EmployeeTable from "../components/EmployeeTable";
@@ -17,6 +17,7 @@ function Dashboard() {
     const [departmentFilter, setDepartmentFilter] = useState("All");
     const [statusFilter, setStatusFilter] = useState("All");
     const [showModal, setShowModal] = useState(false);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
     useEffect(() => {
         loadEmployees();
@@ -63,13 +64,14 @@ function Dashboard() {
     return (
 
         <>
-            <Sidebar />
+            <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
 
             <div
                 style={{
-                    marginLeft: "260px",
+                    marginLeft: isSidebarOpen ? `${SIDEBAR_WIDTH}px` : "0px",
                     background: "#f3f6fb",
-                    minHeight: "100vh"
+                    minHeight: "100vh",
+                    transition: "margin-left 0.25s ease"
                 }}
             >
 
