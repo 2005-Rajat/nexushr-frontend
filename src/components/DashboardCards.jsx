@@ -34,40 +34,40 @@ function DashboardCards({ employees = [] }) {
 
   const cards = [
     {
-      icon: <FaUsers size={20} color="#8458B3" />,
-      chipBg: "linear-gradient(135deg, #D0BDF4, #E5EAF5)",
+      icon: <FaUsers size={20} color="#FFFFFF" />,
+      chipBg: "#7C3AED",
       value: total,
       label: "Total Employees",
       trend: newThisMonth > 0
         ? `+${newThisMonth} joined this month`
         : "No new hires this month",
-      trendColor: newThisMonth > 0 ? "#4CAF7D" : "#9B9FB0"
+      trendColor: newThisMonth > 0 ? "#15803D" : "#4B5563"
     },
     {
-      icon: <FaUserCheck size={20} color="#4CAF7D" />,
-      chipBg: "linear-gradient(135deg, #C9F0DA, #E5EAF5)",
+      icon: <FaUserCheck size={20} color="#FFFFFF" />,
+      chipBg: "#15803D",
       value: activeCount,
       label: "Active Employees",
       trend: `${activePercent}% of total workforce`,
-      trendColor: "#9B9FB0"
+      trendColor: "#4B5563"
     },
     {
-      icon: <FaMoneyBillWave size={20} color="#494D5F" />,
-      chipBg: "linear-gradient(135deg, #A0D2EB, #E5EAF5)",
+      icon: <FaMoneyBillWave size={20} color="#FFFFFF" />,
+      chipBg: "#111827",
       value: `₹ ${avgSalary.toLocaleString()}`,
       label: "Average Salary",
       trend: salaries.length > 0
         ? `₹${lowestSalary.toLocaleString()} – ₹${highestSalary.toLocaleString()} range`
         : "No salary data",
-      trendColor: "#9B9FB0"
+      trendColor: "#4B5563"
     },
     {
-      icon: <FaBuilding size={20} color="#8458B3" />,
-      chipBg: "linear-gradient(135deg, #D0BDF4, #E5EAF5)",
+      icon: <FaBuilding size={20} color="#FFFFFF" />,
+      chipBg: "#7C3AED",
       value: departments,
       label: "Departments",
       trend: "Across your workforce",
-      trendColor: "#9B9FB0"
+      trendColor: "#4B5563"
     }
   ];
 
@@ -78,9 +78,17 @@ function DashboardCards({ employees = [] }) {
 
         <div className="col-md-3 col-sm-6" key={index}>
 
-          <div className="card stat-card h-100" style={{ padding: "0", overflow: "hidden" }}>
+          <div
+            className="card stat-card h-100"
+            style={{
+              padding: "0",
+              overflow: "hidden",
+              border: "1px solid #E5E7EB",
+              boxShadow: "0 2px 10px rgba(17,24,39,0.06)"
+            }}
+          >
 
-            <div className="gradient-bar" />
+            <div style={{ height: "5px", background: "#7C3AED" }} />
 
             <div style={{ padding: "24px" }}>
 
@@ -99,20 +107,20 @@ function DashboardCards({ employees = [] }) {
               <h3
                 style={{
                   fontFamily: "'JetBrains Mono', monospace",
-                  fontWeight: 600,
+                  fontWeight: 700,
                   fontSize: "26px",
-                  color: "#494D5F",
+                  color: "#111827",
                   marginBottom: "4px"
                 }}
               >
                 {card.value}
               </h3>
 
-              <p style={{ color: "#6B6F82", fontSize: "14px", marginBottom: "8px" }}>
+              <p style={{ color: "#374151", fontSize: "14px", marginBottom: "8px", fontWeight: 500 }}>
                 {card.label}
               </p>
 
-              <small style={{ color: card.trendColor, fontWeight: 600, fontSize: "12px" }}>
+              <small style={{ color: card.trendColor, fontWeight: 700, fontSize: "12px" }}>
                 {card.trend}
               </small>
 

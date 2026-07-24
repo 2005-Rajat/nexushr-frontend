@@ -35,9 +35,9 @@ function EmployeeTable({ employees = [], loadEmployees }) {
   };
 
   const statusStyle = (status) => {
-    if (status === "On Leave") return { background: "rgba(224,168,69,0.15)", color: "#A67519" };
-    if (status === "Resigned") return { background: "rgba(139,143,163,0.15)", color: "#6B6F82" };
-    return { background: "rgba(76,175,125,0.12)", color: "#2F8558" };
+    if (status === "On Leave") return { background: "#F59E0B", color: "#FFFFFF" };
+    if (status === "Resigned") return { background: "#6B7280", color: "#FFFFFF" };
+    return { background: "#15803D", color: "#FFFFFF" };
   };
 
   const actionBtn = (bg, color) => ({
@@ -66,35 +66,35 @@ function EmployeeTable({ employees = [], loadEmployees }) {
 
   return (
 
-    <div className="card mt-4" style={{ overflow: "hidden" }}>
+    <div className="card mt-4" style={{ overflow: "hidden", border: "1px solid #E5E7EB" }}>
 
       <div
               className="d-flex justify-content-between align-items-center"
               style={{
-                background: "#8458B3",
+                background: "#7C3AED",
                 padding: "18px 24px"
               }}
           >
-        <h5 style={{ color: "#fff", margin: 0, fontWeight: 700 }}>Employee Records</h5>
-        <small style={{ color: "#C4C7D6" }}>{employees.length} total</small>
+        <h5 style={{ color: "#fff", margin: 0, fontWeight: 800 }}>Employee Records</h5>
+        <small style={{ color: "#FFFFFF", fontWeight: 600 }}>{employees.length} total</small>
       </div>
 
       <div className="table-responsive">
 
         <table className="table table-hover align-middle mb-0">
 
-          <thead style={{ background: "#F8F7FC" }}>
+          <thead style={{ background: "#111827" }}>
 
             <tr>
-              <th style={{ color: "#6B6F82", fontSize: "13px", fontWeight: 600 }}>ID</th>
-              <th style={{ color: "#6B6F82", fontSize: "13px", fontWeight: 600 }}>Employee ID</th>
-              <th style={{ color: "#6B6F82", fontSize: "13px", fontWeight: 600 }}>Name</th>
-              <th style={{ color: "#6B6F82", fontSize: "13px", fontWeight: 600 }}>Email</th>
-              <th style={{ color: "#6B6F82", fontSize: "13px", fontWeight: 600 }}>Department</th>
-              <th style={{ color: "#6B6F82", fontSize: "13px", fontWeight: 600 }}>Designation</th>
-              <th style={{ color: "#6B6F82", fontSize: "13px", fontWeight: 600 }}>Salary</th>
-              <th style={{ color: "#6B6F82", fontSize: "13px", fontWeight: 600 }}>Status</th>
-              <th style={{ color: "#6B6F82", fontSize: "13px", fontWeight: 600 }}>Actions</th>
+              <th style={{ color: "#FFFFFF", fontSize: "13px", fontWeight: 700 }}>ID</th>
+              <th style={{ color: "#FFFFFF", fontSize: "13px", fontWeight: 700 }}>Employee ID</th>
+              <th style={{ color: "#FFFFFF", fontSize: "13px", fontWeight: 700 }}>Name</th>
+              <th style={{ color: "#FFFFFF", fontSize: "13px", fontWeight: 700 }}>Email</th>
+              <th style={{ color: "#FFFFFF", fontSize: "13px", fontWeight: 700 }}>Department</th>
+              <th style={{ color: "#FFFFFF", fontSize: "13px", fontWeight: 700 }}>Designation</th>
+              <th style={{ color: "#FFFFFF", fontSize: "13px", fontWeight: 700 }}>Salary</th>
+              <th style={{ color: "#FFFFFF", fontSize: "13px", fontWeight: 700 }}>Status</th>
+              <th style={{ color: "#FFFFFF", fontSize: "13px", fontWeight: 700 }}>Actions</th>
             </tr>
 
           </thead>
@@ -107,19 +107,19 @@ function EmployeeTable({ employees = [], loadEmployees }) {
 
                 <tr key={emp.id}>
 
-                  <td className="font-mono" style={{ color: "#9B9FB0" }}>{emp.id}</td>
+                  <td className="font-mono" style={{ color: "#374151", fontWeight: 600 }}>{emp.id}</td>
 
-                  <td className="font-mono" style={{ fontWeight: 600 }}>{emp.employeeId}</td>
+                  <td className="font-mono" style={{ fontWeight: 700, color: "#111827" }}>{emp.employeeId}</td>
 
-                  <td style={{ fontWeight: 600, color: "#494D5F" }}>{emp.name}</td>
+                  <td style={{ fontWeight: 700, color: "#111827" }}>{emp.name}</td>
 
-                  <td style={{ color: "#6B6F82" }}>{emp.email}</td>
+                  <td style={{ color: "#374151", fontWeight: 500 }}>{emp.email}</td>
 
-                  <td>{emp.department}</td>
+                  <td style={{ color: "#111827", fontWeight: 500 }}>{emp.department}</td>
 
-                  <td>{emp.designation}</td>
+                  <td style={{ color: "#111827", fontWeight: 500 }}>{emp.designation}</td>
 
-                  <td className="font-mono" style={{ fontWeight: 600 }}>₹ {emp.salary}</td>
+                  <td className="font-mono" style={{ fontWeight: 700, color: "#111827" }}>₹ {emp.salary}</td>
 
                   <td>
                     <span className="badge" style={statusStyle(emp.status)}>
@@ -130,21 +130,21 @@ function EmployeeTable({ employees = [], loadEmployees }) {
                   <td>
 
                     <button
-                      style={actionBtn("#EAF4FB", "#3B82A6")}
+                      style={actionBtn("#2563EB", "#FFFFFF")}
                       onClick={() => openView(emp)}
                     >
                       <FaEye size={13} />
                     </button>
 
                     <button
-                      style={actionBtn("#F3ECFB", "#8458B3")}
+                      style={actionBtn("#7C3AED", "#FFFFFF")}
                       onClick={() => openEdit(emp)}
                     >
                       <FaEdit size={13} />
                     </button>
 
                     <button
-                      style={actionBtn("#FBEAEA", "#D14343")}
+                      style={actionBtn("#DC2626", "#FFFFFF")}
                       onClick={() => openDelete(emp)}
                     >
                       <FaTrash size={13} />
@@ -160,7 +160,7 @@ function EmployeeTable({ employees = [], loadEmployees }) {
 
               <tr>
 
-                <td colSpan="9" className="text-center py-4" style={{ color: "#9B9FB0" }}>
+                <td colSpan="9" className="text-center py-4" style={{ color: "#374151", fontWeight: 600 }}>
 
                   No Employees Found
 
@@ -178,9 +178,9 @@ function EmployeeTable({ employees = [], loadEmployees }) {
 
       {totalPages > 1 && (
 
-        <div className="d-flex justify-content-between align-items-center" style={{ padding: "16px 24px", borderTop: "1px solid #EEF0F8" }}>
+        <div className="d-flex justify-content-between align-items-center" style={{ padding: "16px 24px", borderTop: "2px solid #E5E7EB" }}>
 
-          <small style={{ color: "#9B9FB0" }}>
+          <small style={{ color: "#374151", fontWeight: 600 }}>
             Page {currentPage} of {totalPages}
           </small>
 
@@ -200,8 +200,8 @@ function EmployeeTable({ employees = [], loadEmployees }) {
                     onClick={() => goToPage(page)}
                     style={
                       currentPage === page
-                        ? { background: "#8458B3", borderColor: "#8458B3", color: "#fff" }
-                        : {}
+                        ? { background: "#7C3AED", borderColor: "#7C3AED", color: "#fff", fontWeight: 700 }
+                        : { color: "#111827", fontWeight: 600 }
                     }
                   >
                     {page}
