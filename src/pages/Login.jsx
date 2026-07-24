@@ -41,7 +41,7 @@ function Login() {
 
     const loginUser = async () => {
 
-        if (!login.email || !login.password) {
+        if (!login.email.trim() || !login.password.trim()) {
             setError("Enter both email and password.");
             return;
         }
@@ -53,11 +53,17 @@ function Login() {
 
             const response = await API.post("/api/login", login);
 
-            if (response.data != null) {
+            console.log("Login Response:", response.data);
 
+            if (response.status === 200 && response.data) {
+
+                // Save logged-in user
                 localStorage.setItem("user", JSON.stringify(response.data));
 
-                navigate("/dashboard");
+                console.log("User saved:", localStorage.getItem("user"));
+
+                // Redirect to Dashboard
+                navigate("/dashboard", { replace: true });
 
             } else {
 
@@ -67,8 +73,13 @@ function Login() {
 
         } catch (err) {
 
-            setError("Login failed. Check your credentials and try again.");
-            console.log(err);
+            console.error(err);
+
+            if (err.response?.status === 401) {
+                setError("Invalid email or password.");
+            } else {
+                setError("Unable to connect to the server.");
+            }
 
         } finally {
 
