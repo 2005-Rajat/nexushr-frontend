@@ -1,7 +1,12 @@
-import Login from "./pages/Login"; // or "./pages/Login" if you renamed it
+import { BrowserRouter } from "react-router-dom";
+import Login from "./pages/Login";
 
 function App() {
-  return <Login />;
+  return (
+    <BrowserRouter>
+      <Login />
+    </BrowserRouter>
+  );
 }
 
 export default App;
