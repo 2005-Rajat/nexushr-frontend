@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import {
   FaTachometerAlt,
@@ -8,10 +9,14 @@ import {
   FaCog,
   FaSignOutAlt,
   FaUserCircle,
-  FaBuilding
+  FaBuilding,
+  FaChevronLeft,
+  FaChevronRight
 } from "react-icons/fa";
 
-function Sidebar() {
+const SIDEBAR_WIDTH = 260;
+
+function Sidebar({ isOpen, setIsOpen }) {
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -33,152 +38,190 @@ function Sidebar() {
     window.location.href = "/";
   };
 
+  const toggleSidebar = () => setIsOpen((prev) => !prev);
+
   return (
-    <div
-      style={{
-        width: "260px",
-        height: "100vh",
-        background: "#0D0F1C",
-        position: "fixed",
-        color: "#FFFFFF",
-        padding: "25px",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        boxShadow: "5px 0 30px rgba(0,0,0,0.4)",
-        zIndex: 10,
-        borderRight: "1px solid rgba(255,255,255,0.06)"
-      }}
-    >
-      <div>
+    <>
+      {/* Sidebar panel */}
+      <div
+        style={{
+          width: `${SIDEBAR_WIDTH}px`,
+          height: "100vh",
+          background: "#0D0F1C",
+          position: "fixed",
+          top: 0,
+          left: 0,
+          color: "#FFFFFF",
+          padding: "25px",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          boxShadow: "5px 0 30px rgba(0,0,0,0.4)",
+          zIndex: 10,
+          borderRight: "1px solid rgba(255,255,255,0.06)",
+          transform: isOpen ? "translateX(0)" : `translateX(-${SIDEBAR_WIDTH}px)`,
+          transition: "transform 0.25s ease"
+        }}
+      >
+        <div>
 
-        <h2
-          style={{
-            fontFamily: "'Plus Jakarta Sans', sans-serif",
-            fontWeight: 800,
-            fontSize: "24px",
-            marginBottom: "10px",
-            color: "#FFFFFF",
-            letterSpacing: "-0.5px"
-          }}
-        >
-          Nexus<span style={{ color: "#9333EA" }}>HR</span>
-        </h2>
+          <h2
+            style={{
+              fontFamily: "'Plus Jakarta Sans', sans-serif",
+              fontWeight: 800,
+              fontSize: "24px",
+              marginBottom: "10px",
+              color: "#FFFFFF",
+              letterSpacing: "-0.5px"
+            }}
+          >
+            Nexus<span style={{ color: "#9333EA" }}>HR</span>
+          </h2>
+
+          <div
+            style={{
+              height: "4px",
+              width: "60px",
+              background: "#9333EA",
+              borderRadius: "999px",
+              marginBottom: "35px"
+            }}
+          />
+
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "15px",
+              marginBottom: "35px",
+              background: "#171A2B",
+              padding: "12px",
+              borderRadius: "16px",
+              border: "1px solid rgba(255,255,255,0.08)"
+            }}
+          >
+            <FaUserCircle size={40} color="#9333EA" />
+
+            <div>
+              <h6 style={{ margin: 0, fontFamily: "'Inter', sans-serif", fontWeight: 700, color: "#FFFFFF" }}>
+                {user ? user.name : "Administrator"}
+              </h6>
+
+              <small style={{ color: "#9CA3AF", fontSize: "12px", letterSpacing: "0.5px", fontWeight: 600 }}>
+                {user ? user.role : "ADMIN"}
+              </small>
+            </div>
+          </div>
+
+          {menu.map((item, index) => {
+
+            const isActive = location.pathname === item.path;
+
+            return (
+
+              <div
+                key={index}
+                onClick={() => navigate(item.path)}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "15px",
+                  padding: "13px 14px",
+                  borderRadius: "12px",
+                  marginBottom: "8px",
+                  cursor: "pointer",
+                  transition: "0.15s ease",
+                  fontSize: "15px",
+                  fontFamily: "'Inter', sans-serif",
+                  fontWeight: isActive ? 700 : 600,
+                  background: isActive ? "#7C3AED" : "transparent",
+                  color: "#FFFFFF",
+                  boxShadow: isActive ? "0 6px 18px rgba(124, 58, 237, 0.45)" : "none"
+                }}
+                onMouseEnter={(e) => {
+                  if (!isActive) {
+                    e.currentTarget.style.background = "#7C3AED";
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (!isActive) {
+                    e.currentTarget.style.background = "transparent";
+                  }
+                }}
+              >
+                {item.icon}
+
+                {item.name}
+
+              </div>
+
+            );
+
+          })}
+
+        </div>
 
         <div
-          style={{
-            height: "4px",
-            width: "60px",
-            background: "#9333EA",
-            borderRadius: "999px",
-            marginBottom: "35px"
-          }}
-        />
-
-        <div
+          onClick={logout}
           style={{
             display: "flex",
             alignItems: "center",
-            gap: "15px",
-            marginBottom: "35px",
-            background: "#171A2B",
-            padding: "12px",
-            borderRadius: "16px",
-            border: "1px solid rgba(255,255,255,0.08)"
+            gap: "12px",
+            padding: "14px",
+            background: "#DC2626",
+            borderRadius: "12px",
+            cursor: "pointer",
+            justifyContent: "center",
+            fontWeight: "700",
+            color: "#FFFFFF",
+            fontFamily: "'Inter', sans-serif",
+            transition: "0.2s ease"
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background = "#B91C1C";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = "#DC2626";
           }}
         >
-          <FaUserCircle size={40} color="#9333EA" />
+          <FaSignOutAlt />
 
-          <div>
-            <h6 style={{ margin: 0, fontFamily: "'Inter', sans-serif", fontWeight: 700, color: "#FFFFFF" }}>
-              {user ? user.name : "Administrator"}
-            </h6>
+          Logout
 
-            <small style={{ color: "#9CA3AF", fontSize: "12px", letterSpacing: "0.5px", fontWeight: 600 }}>
-              {user ? user.role : "ADMIN"}
-            </small>
-          </div>
         </div>
 
-        {menu.map((item, index) => {
-
-          const isActive = location.pathname === item.path;
-
-          return (
-
-            <div
-              key={index}
-              onClick={() => navigate(item.path)}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "15px",
-                padding: "13px 14px",
-                borderRadius: "12px",
-                marginBottom: "8px",
-                cursor: "pointer",
-                transition: "0.15s ease",
-                fontSize: "15px",
-                fontFamily: "'Inter', sans-serif",
-                fontWeight: isActive ? 700 : 600,
-                background: isActive ? "#7C3AED" : "transparent",
-                color: "#FFFFFF",
-                boxShadow: isActive ? "0 6px 18px rgba(124, 58, 237, 0.45)" : "none"
-              }}
-              onMouseEnter={(e) => {
-                if (!isActive) {
-                  e.currentTarget.style.background = "#7C3AED";
-                }
-              }}
-              onMouseLeave={(e) => {
-                if (!isActive) {
-                  e.currentTarget.style.background = "transparent";
-                }
-              }}
-            >
-              {item.icon}
-
-              {item.name}
-
-            </div>
-
-          );
-
-        })}
-
       </div>
 
+      {/* Floating toggle tab — stays visible whether sidebar is open or closed */}
       <div
-        onClick={logout}
+        onClick={toggleSidebar}
         style={{
+          position: "fixed",
+          top: "32px",
+          left: isOpen ? `${SIDEBAR_WIDTH}px` : "0px",
+          width: "28px",
+          height: "44px",
+          background: "#7C3AED",
+          borderRadius: isOpen ? "0 10px 10px 0" : "0 10px 10px 0",
           display: "flex",
           alignItems: "center",
-          gap: "12px",
-          padding: "14px",
-          background: "#DC2626",
-          borderRadius: "12px",
-          cursor: "pointer",
           justifyContent: "center",
-          fontWeight: "700",
-          color: "#FFFFFF",
-          fontFamily: "'Inter', sans-serif",
-          transition: "0.2s ease"
+          cursor: "pointer",
+          zIndex: 11,
+          boxShadow: "3px 0 10px rgba(0,0,0,0.25)",
+          transition: "left 0.25s ease"
         }}
-        onMouseEnter={(e) => {
-          e.currentTarget.style.background = "#B91C1C";
-        }}
-        onMouseLeave={(e) => {
-          e.currentTarget.style.background = "#DC2626";
-        }}
+        title={isOpen ? "Collapse sidebar" : "Expand sidebar"}
       >
-        <FaSignOutAlt />
-
-        Logout
-
+        {isOpen ? (
+          <FaChevronLeft size={13} color="#FFFFFF" />
+        ) : (
+          <FaChevronRight size={13} color="#FFFFFF" />
+        )}
       </div>
-
-    </div>
+    </>
   );
 }
 
 export default Sidebar;
+export { SIDEBAR_WIDTH };
