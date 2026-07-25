@@ -180,9 +180,10 @@ function Login() {
                     <h2
                         style={{
                             fontFamily: "'Fraunces', serif",
-                            fontWeight: 600,
-                            fontSize: "28px",
-                            letterSpacing: "-0.5px"
+                            fontWeight: 700,
+                            fontSize: "38px",
+                            letterSpacing: "-0.5px",
+                            color: "#FDF6E3"
                         }}
                     >
                         Nexus<span style={{ color: "#E3A857" }}>HR</span>
