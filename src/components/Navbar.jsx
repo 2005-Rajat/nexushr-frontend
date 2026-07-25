@@ -6,29 +6,31 @@ function Navbar() {
 
     <div
       style={{
-        background: "#FFFFFF",
+        background: "rgba(255, 253, 247, 0.85)",
+        backdropFilter: "blur(12px)",
+        WebkitBackdropFilter: "blur(12px)",
         height: "72px",
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
         padding: "0 40px",
-        borderBottom: "2px solid #E5E7EB",
+        borderBottom: "1px solid #EAE2C9",
         position: "sticky",
         top: 0,
         zIndex: 5
       }}
     >
 
-      <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 800, color: "#111827", margin: 0 }}>
+      <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, color: "#1B1F3B", margin: 0 }}>
         NexusHR Dashboard
       </h3>
 
       <div style={{ display: "flex", alignItems: "center", gap: "22px" }}>
 
-        <FaSearch size={18} color="#7C3AED" style={{ cursor: "pointer" }} />
+        <FaSearch size={18} color="#C2A25F" style={{ cursor: "pointer" }} />
 
         <div style={{ position: "relative", cursor: "pointer" }}>
-          <FaBell size={18} color="#7C3AED" />
+          <FaBell size={18} color="#C2A25F" />
           <span
             style={{
               position: "absolute",
@@ -36,14 +38,13 @@ function Navbar() {
               right: "-4px",
               width: "8px",
               height: "8px",
-              background: "#F59E0B",
-              borderRadius: "50%",
-              border: "1px solid #FFFFFF"
+              background: "#E0A845",
+              borderRadius: "50%"
             }}
           />
         </div>
 
-        <FaUserCircle size={30} color="#111827" style={{ cursor: "pointer" }} />
+        <FaUserCircle size={30} color="#1B1F3B" style={{ cursor: "pointer" }} />
 
       </div>
 

@@ -4,13 +4,13 @@ import {
     LineChart, Line
 } from "recharts";
 
-const COLORS = ["#7C3AED", "#111827", "#15803D", "#F59E0B", "#2563EB", "#DC2626"];
+const COLORS = ["#1B1F3B", "#C2A25F", "#15803D", "#8A7F63", "#2E2145", "#DC2626"];
 
 function Charts({ employees = [] }) {
 
     if (employees.length === 0) {
         return (
-            <div className="card p-5 text-center" style={{ color: "#374151", fontWeight: 600 }}>
+            <div className="card p-5 text-center" style={{ color: "#5C5440", fontWeight: 600 }}>
                 No data available yet. Add employees to see analytics.
             </div>
         );
@@ -53,23 +53,23 @@ function Charts({ employees = [] }) {
         <div className="row g-4">
 
             <div className="col-lg-4">
-                <div className="card stat-card h-100 p-3" style={{ border: "1px solid #E5E7EB" }}>
-                    <h6 className="fw-bold mb-3" style={{ color: "#111827" }}>Employees per Department</h6>
+                <div className="card stat-card h-100 p-3" style={{ border: "1px solid #EAE2C9" }}>
+                    <h6 className="fw-bold mb-3" style={{ color: "#1B1F3B" }}>Employees per Department</h6>
                     <ResponsiveContainer width="100%" height={250}>
                         <BarChart data={departmentData}>
-                            <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
-                            <XAxis dataKey="department" fontSize={12} stroke="#374151" />
-                            <YAxis allowDecimals={false} fontSize={12} stroke="#374151" />
-                            <Tooltip contentStyle={{ borderRadius: "10px", border: "1px solid #E5E7EB", boxShadow: "0 4px 20px rgba(17,24,39,0.15)" }} />
-                            <Bar dataKey="employees" fill="#7C3AED" radius={[6, 6, 0, 0]} />
+                            <CartesianGrid strokeDasharray="3 3" stroke="#EAE2C9" />
+                            <XAxis dataKey="department" fontSize={12} stroke="#5C5440" />
+                            <YAxis allowDecimals={false} fontSize={12} stroke="#5C5440" />
+                            <Tooltip contentStyle={{ borderRadius: "10px", border: "1px solid #EAE2C9", boxShadow: "0 4px 20px rgba(27,31,59,0.15)" }} />
+                            <Bar dataKey="employees" fill="#1B1F3B" radius={[6, 6, 0, 0]} />
                         </BarChart>
                     </ResponsiveContainer>
                 </div>
             </div>
 
             <div className="col-lg-4">
-                <div className="card stat-card h-100 p-3" style={{ border: "1px solid #E5E7EB" }}>
-                    <h6 className="fw-bold mb-3" style={{ color: "#111827" }}>Salary by Department</h6>
+                <div className="card stat-card h-100 p-3" style={{ border: "1px solid #EAE2C9" }}>
+                    <h6 className="fw-bold mb-3" style={{ color: "#1B1F3B" }}>Salary by Department</h6>
                     <ResponsiveContainer width="100%" height={250}>
                         <PieChart>
                             <Pie
@@ -85,7 +85,7 @@ function Charts({ employees = [] }) {
                                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                                 ))}
                             </Pie>
-                            <Tooltip contentStyle={{ borderRadius: "10px", border: "1px solid #E5E7EB", boxShadow: "0 4px 20px rgba(17,24,39,0.15)" }} />
+                            <Tooltip contentStyle={{ borderRadius: "10px", border: "1px solid #EAE2C9", boxShadow: "0 4px 20px rgba(27,31,59,0.15)" }} />
                             <Legend />
                         </PieChart>
                     </ResponsiveContainer>
@@ -93,14 +93,14 @@ function Charts({ employees = [] }) {
             </div>
 
             <div className="col-lg-4">
-                <div className="card stat-card h-100 p-3" style={{ border: "1px solid #E5E7EB" }}>
-                    <h6 className="fw-bold mb-3" style={{ color: "#111827" }}>Hiring Trend</h6>
+                <div className="card stat-card h-100 p-3" style={{ border: "1px solid #EAE2C9" }}>
+                    <h6 className="fw-bold mb-3" style={{ color: "#1B1F3B" }}>Hiring Trend</h6>
                     <ResponsiveContainer width="100%" height={250}>
                         <LineChart data={hiringData}>
-                            <CartesianGrid strokeDasharray="3 3" stroke="#E5E7EB" />
-                            <XAxis dataKey="month" fontSize={12} stroke="#374151" />
-                            <YAxis allowDecimals={false} fontSize={12} stroke="#374151" />
-                            <Tooltip contentStyle={{ borderRadius: "10px", border: "1px solid #E5E7EB", boxShadow: "0 4px 20px rgba(17,24,39,0.15)" }} />
+                            <CartesianGrid strokeDasharray="3 3" stroke="#EAE2C9" />
+                            <XAxis dataKey="month" fontSize={12} stroke="#5C5440" />
+                            <YAxis allowDecimals={false} fontSize={12} stroke="#5C5440" />
+                            <Tooltip contentStyle={{ borderRadius: "10px", border: "1px solid #EAE2C9", boxShadow: "0 4px 20px rgba(27,31,59,0.15)" }} />
                             <Line type="monotone" dataKey="hires" stroke="#15803D" strokeWidth={2.5} dot={{ fill: "#15803D", r: 4 }} />
                         </LineChart>
                     </ResponsiveContainer>

@@ -47,18 +47,18 @@ function Sidebar({ isOpen, setIsOpen }) {
         style={{
           width: `${SIDEBAR_WIDTH}px`,
           height: "100vh",
-          background: "#0D0F1C",
+          background: "#14172B",
           position: "fixed",
           top: 0,
           left: 0,
-          color: "#FFFFFF",
+          color: "#FFFDF7",
           padding: "25px",
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
           boxShadow: "5px 0 30px rgba(0,0,0,0.4)",
           zIndex: 10,
-          borderRight: "1px solid rgba(255,255,255,0.06)",
+          borderRight: "1px solid rgba(255,253,247,0.06)",
           transform: isOpen ? "translateX(0)" : `translateX(-${SIDEBAR_WIDTH}px)`,
           transition: "transform 0.25s ease"
         }}
@@ -71,18 +71,18 @@ function Sidebar({ isOpen, setIsOpen }) {
               fontWeight: 800,
               fontSize: "24px",
               marginBottom: "10px",
-              color: "#FFFFFF",
+              color: "#FFFDF7",
               letterSpacing: "-0.5px"
             }}
           >
-            Nexus<span style={{ color: "#9333EA" }}>HR</span>
+            Nexus<span style={{ color: "#E3A857" }}>HR</span>
           </h2>
 
           <div
             style={{
               height: "4px",
               width: "60px",
-              background: "#9333EA",
+              background: "#E3A857",
               borderRadius: "999px",
               marginBottom: "35px"
             }}
@@ -94,20 +94,20 @@ function Sidebar({ isOpen, setIsOpen }) {
               alignItems: "center",
               gap: "15px",
               marginBottom: "35px",
-              background: "#171A2B",
+              background: "#20243D",
               padding: "12px",
               borderRadius: "16px",
-              border: "1px solid rgba(255,255,255,0.08)"
+              border: "1px solid rgba(255,253,247,0.08)"
             }}
           >
-            <FaUserCircle size={40} color="#9333EA" />
+            <FaUserCircle size={40} color="#E3A857" />
 
             <div>
-              <h6 style={{ margin: 0, fontFamily: "'Inter', sans-serif", fontWeight: 700, color: "#FFFFFF" }}>
+              <h6 style={{ margin: 0, fontFamily: "'Inter', sans-serif", fontWeight: 700, color: "#FFFDF7" }}>
                 {user ? user.name : "Administrator"}
               </h6>
 
-              <small style={{ color: "#9CA3AF", fontSize: "12px", letterSpacing: "0.5px", fontWeight: 600 }}>
+              <small style={{ color: "#B8AD8E", fontSize: "12px", letterSpacing: "0.5px", fontWeight: 600 }}>
                 {user ? user.role : "ADMIN"}
               </small>
             </div>
@@ -134,18 +134,20 @@ function Sidebar({ isOpen, setIsOpen }) {
                   fontSize: "15px",
                   fontFamily: "'Inter', sans-serif",
                   fontWeight: isActive ? 700 : 600,
-                  background: isActive ? "#7C3AED" : "transparent",
-                  color: "#FFFFFF",
-                  boxShadow: isActive ? "0 6px 18px rgba(124, 58, 237, 0.45)" : "none"
+                  background: isActive ? "#C2A25F" : "transparent",
+                  color: isActive ? "#1B1F3B" : "#FFFDF7",
+                  boxShadow: isActive ? "0 6px 18px rgba(194, 162, 95, 0.35)" : "none"
                 }}
                 onMouseEnter={(e) => {
                   if (!isActive) {
-                    e.currentTarget.style.background = "#7C3AED";
+                    e.currentTarget.style.background = "#C2A25F";
+                    e.currentTarget.style.color = "#1B1F3B";
                   }
                 }}
                 onMouseLeave={(e) => {
                   if (!isActive) {
                     e.currentTarget.style.background = "transparent";
+                    e.currentTarget.style.color = "#FFFDF7";
                   }
                 }}
               >
@@ -201,8 +203,8 @@ function Sidebar({ isOpen, setIsOpen }) {
           left: isOpen ? `${SIDEBAR_WIDTH}px` : "0px",
           width: "28px",
           height: "44px",
-          background: "#7C3AED",
-          borderRadius: isOpen ? "0 10px 10px 0" : "0 10px 10px 0",
+          background: "#C2A25F",
+          borderRadius: "0 10px 10px 0",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -214,9 +216,9 @@ function Sidebar({ isOpen, setIsOpen }) {
         title={isOpen ? "Collapse sidebar" : "Expand sidebar"}
       >
         {isOpen ? (
-          <FaChevronLeft size={13} color="#FFFFFF" />
+          <FaChevronLeft size={13} color="#1B1F3B" />
         ) : (
-          <FaChevronRight size={13} color="#FFFFFF" />
+          <FaChevronRight size={13} color="#1B1F3B" />
         )}
       </div>
     </>

@@ -34,40 +34,40 @@ function DashboardCards({ employees = [] }) {
 
   const cards = [
     {
-      icon: <FaUsers size={20} color="#FFFFFF" />,
-      chipBg: "#7C3AED",
+      icon: <FaUsers size={20} color="#FFFDF7" />,
+      chipBg: "#1B1F3B",
       value: total,
       label: "Total Employees",
       trend: newThisMonth > 0
         ? `+${newThisMonth} joined this month`
         : "No new hires this month",
-      trendColor: newThisMonth > 0 ? "#15803D" : "#4B5563"
+      trendColor: newThisMonth > 0 ? "#15803D" : "#8A7F63"
     },
     {
-      icon: <FaUserCheck size={20} color="#FFFFFF" />,
+      icon: <FaUserCheck size={20} color="#FFFDF7" />,
       chipBg: "#15803D",
       value: activeCount,
       label: "Active Employees",
       trend: `${activePercent}% of total workforce`,
-      trendColor: "#4B5563"
+      trendColor: "#8A7F63"
     },
     {
-      icon: <FaMoneyBillWave size={20} color="#FFFFFF" />,
-      chipBg: "#111827",
+      icon: <FaMoneyBillWave size={20} color="#1B1F3B" />,
+      chipBg: "#C2A25F",
       value: `₹ ${avgSalary.toLocaleString()}`,
       label: "Average Salary",
       trend: salaries.length > 0
         ? `₹${lowestSalary.toLocaleString()} – ₹${highestSalary.toLocaleString()} range`
         : "No salary data",
-      trendColor: "#4B5563"
+      trendColor: "#8A7F63"
     },
     {
-      icon: <FaBuilding size={20} color="#FFFFFF" />,
-      chipBg: "#7C3AED",
+      icon: <FaBuilding size={20} color="#FFFDF7" />,
+      chipBg: "#1B1F3B",
       value: departments,
       label: "Departments",
       trend: "Across your workforce",
-      trendColor: "#4B5563"
+      trendColor: "#8A7F63"
     }
   ];
 
@@ -83,12 +83,12 @@ function DashboardCards({ employees = [] }) {
             style={{
               padding: "0",
               overflow: "hidden",
-              border: "1px solid #E5E7EB",
-              boxShadow: "0 2px 10px rgba(17,24,39,0.06)"
+              border: "1px solid #EAE2C9",
+              boxShadow: "0 2px 10px rgba(27,31,59,0.06)"
             }}
           >
 
-            <div style={{ height: "5px", background: "#7C3AED" }} />
+            <div style={{ height: "5px", background: "linear-gradient(90deg, #1B1F3B 0%, #C2A25F 100%)" }} />
 
             <div style={{ padding: "24px" }}>
 
@@ -109,14 +109,14 @@ function DashboardCards({ employees = [] }) {
                   fontFamily: "'JetBrains Mono', monospace",
                   fontWeight: 700,
                   fontSize: "26px",
-                  color: "#111827",
+                  color: "#1B1F3B",
                   marginBottom: "4px"
                 }}
               >
                 {card.value}
               </h3>
 
-              <p style={{ color: "#374151", fontSize: "14px", marginBottom: "8px", fontWeight: 500 }}>
+              <p style={{ color: "#5C5440", fontSize: "14px", marginBottom: "8px", fontWeight: 500 }}>
                 {card.label}
               </p>
 

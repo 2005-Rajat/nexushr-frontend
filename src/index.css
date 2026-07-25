@@ -1,19 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap');
 
 :root{
-    --color-ink: #494D5F;
-    --color-ink-deep: #383B49;
-    --color-violet: #8458B3;
-    --color-lilac: #D0BDF4;
-    --color-sky: #A0D2EB;
-    --color-mist: #E5EAF5;
+    --color-ink: #1B1F3B;
+    --color-ink-deep: #14172B;
+    --color-violet: #C2A25F;
+    --color-lilac: #EAE2C9;
+    --color-sky: #8A7F63;
+    --color-mist: #FFFDF7;
     --color-white: #FFFFFF;
 
-    --gradient-signature: linear-gradient(90deg, #A0D2EB 0%, #D0BDF4 50%, #8458B3 100%);
+    --gradient-signature: linear-gradient(90deg, #1B1F3B 0%, #2E2145 50%, #C2A25F 100%);
 
-    --status-active: #4CAF7D;
+    --status-active: #15803D;
     --status-leave: #E0A845;
-    --status-resigned: #8B8FA3;
+    --status-resigned: #8A7F63;
 
     --font-display: 'Plus Jakarta Sans', sans-serif;
     --font-body: 'Inter', sans-serif;
@@ -23,8 +23,8 @@
     --radius-md: 14px;
     --radius-sm: 10px;
 
-    --shadow-soft: 0 4px 20px rgba(73, 77, 95, 0.08);
-    --shadow-hover: 0 12px 32px rgba(132, 88, 179, 0.14);
+    --shadow-soft: 0 4px 20px rgba(27, 31, 59, 0.08);
+    --shadow-hover: 0 12px 32px rgba(194, 162, 95, 0.20);
 }
 
 *{
@@ -100,23 +100,26 @@ h1, h2, h3, h4, h5, h6{
 .btn-primary{
     background: var(--color-violet) !important;
     border-color: var(--color-violet) !important;
+    color: #1B1F3B !important;
 }
 
 .btn-primary:hover{
-    background: #74499f !important;
-    border-color: #74499f !important;
-    box-shadow: 0 8px 20px rgba(132, 88, 179, 0.3);
+    background: #A9863F !important;
+    border-color: #A9863F !important;
+    box-shadow: 0 8px 20px rgba(194, 162, 95, 0.35);
+    color: #FFFFFF !important;
 }
 
 .form-control, .form-select{
     border-radius: var(--radius-sm);
-    border: 1px solid #DCE1F0;
+    border: 1px solid #EAE2C9;
     font-family: var(--font-body);
+    background: #FFFCF2;
 }
 
 .form-control:focus, .form-select:focus{
     border-color: var(--color-violet);
-    box-shadow: 0 0 0 3px rgba(132, 88, 179, 0.15);
+    box-shadow: 0 0 0 3px rgba(194, 162, 95, 0.18);
 }
 
 .badge{
