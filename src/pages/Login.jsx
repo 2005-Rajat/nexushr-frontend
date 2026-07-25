@@ -97,12 +97,35 @@ function Login() {
 
         <div className="d-flex" style={{ height: "100vh", width: "100%", fontFamily: "'Inter', sans-serif" }}>
 
+            <style>{`
+                @keyframes floatBlobOne {
+                    0%   { transform: translate(0px, 0px) scale(1); }
+                    33%  { transform: translate(30px, -40px) scale(1.08); }
+                    66%  { transform: translate(-20px, 20px) scale(0.95); }
+                    100% { transform: translate(0px, 0px) scale(1); }
+                }
+                @keyframes floatBlobTwo {
+                    0%   { transform: translate(0px, 0px) scale(1); }
+                    50%  { transform: translate(-35px, 30px) scale(1.12); }
+                    100% { transform: translate(0px, 0px) scale(1); }
+                }
+                @keyframes floatBlobThree {
+                    0%   { transform: translate(0px, 0px) rotate(0deg); }
+                    50%  { transform: translate(20px, -25px) rotate(8deg); }
+                    100% { transform: translate(0px, 0px) rotate(0deg); }
+                }
+                .login-input:focus {
+                    border-color: #E3A857 !important;
+                    box-shadow: 0 0 0 3px rgba(227, 168, 87, 0.18) !important;
+                }
+            `}</style>
+
             {/* Left brand panel */}
             <div
                 className="d-none d-md-flex flex-column justify-content-between"
                 style={{
                     width: "45%",
-                    background: "linear-gradient(160deg, #1B1F3B 0%, #3D2B56 100%)",
+                    background: "linear-gradient(160deg, #14172B 0%, #2E2145 100%)",
                     padding: "60px",
                     color: "#fff",
                     position: "relative",
@@ -110,7 +133,49 @@ function Login() {
                 }}
             >
 
-                <div>
+                {/* Animated background shapes */}
+                <div
+                    style={{
+                        position: "absolute",
+                        top: "-80px",
+                        right: "-100px",
+                        width: "320px",
+                        height: "320px",
+                        borderRadius: "50%",
+                        background: "radial-gradient(circle, rgba(227,168,87,0.20) 0%, rgba(227,168,87,0) 70%)",
+                        animation: "floatBlobOne 14s ease-in-out infinite",
+                        pointerEvents: "none"
+                    }}
+                />
+                <div
+                    style={{
+                        position: "absolute",
+                        bottom: "-60px",
+                        left: "-90px",
+                        width: "280px",
+                        height: "280px",
+                        borderRadius: "50%",
+                        background: "radial-gradient(circle, rgba(160,122,209,0.22) 0%, rgba(160,122,209,0) 70%)",
+                        animation: "floatBlobTwo 18s ease-in-out infinite",
+                        pointerEvents: "none"
+                    }}
+                />
+                <div
+                    style={{
+                        position: "absolute",
+                        top: "40%",
+                        right: "10%",
+                        width: "140px",
+                        height: "140px",
+                        borderRadius: "38% 62% 60% 40% / 40% 45% 55% 60%",
+                        background: "rgba(255, 249, 230, 0.06)",
+                        border: "1px solid rgba(255, 249, 230, 0.10)",
+                        animation: "floatBlobThree 20s ease-in-out infinite",
+                        pointerEvents: "none"
+                    }}
+                />
+
+                <div style={{ position: "relative", zIndex: 1 }}>
 
                     <h2
                         style={{
@@ -139,20 +204,21 @@ function Login() {
                             fontWeight: 600,
                             fontSize: "32px",
                             lineHeight: "1.3",
-                            marginBottom: "20px"
+                            marginBottom: "20px",
+                            color: "#FDF6E3"
                         }}
                     >
                         Every punch in, accounted for.
                     </h1>
 
-                    <p style={{ color: "#9AA0C3", fontSize: "15px", lineHeight: "1.7" }}>
+                    <p style={{ color: "#D8D2C4", fontSize: "15px", lineHeight: "1.7" }}>
                         Employee records, live attendance, and payroll — one dashboard built for HR teams.
                     </p>
 
                 </div>
 
                 {/* Signature: live clock, tied to punch-based attendance */}
-                <div>
+                <div style={{ position: "relative", zIndex: 1 }}>
 
                     <div
                         style={{
@@ -160,7 +226,7 @@ function Login() {
                             fontSize: "56px",
                             fontWeight: 600,
                             letterSpacing: "1px",
-                            color: "#fff",
+                            color: "#FDF6E3",
                             fontVariantNumeric: "tabular-nums",
                             lineHeight: 1
                         }}
@@ -168,23 +234,23 @@ function Login() {
                         {timeString}
                     </div>
 
-                    <p style={{ color: "#9AA0C3", fontSize: "14px", marginTop: "8px", marginBottom: "36px" }}>
+                    <p style={{ color: "#D8D2C4", fontSize: "14px", marginTop: "8px", marginBottom: "36px" }}>
                         {dateString}
                     </p>
 
                     <div className="d-flex align-items-center gap-3 mb-3">
                         <FaUsers color="#E3A857" size={15} style={{ flexShrink: 0 }} />
-                        <span style={{ color: "#C4C7D6", fontSize: "14px" }}>Centralized employee records</span>
+                        <span style={{ color: "#E9E4D8", fontSize: "14px" }}>Centralized employee records</span>
                     </div>
 
                     <div className="d-flex align-items-center gap-3 mb-3">
                         <FaChartBar color="#E3A857" size={15} style={{ flexShrink: 0 }} />
-                        <span style={{ color: "#C4C7D6", fontSize: "14px" }}>Real-time workforce analytics</span>
+                        <span style={{ color: "#E9E4D8", fontSize: "14px" }}>Real-time workforce analytics</span>
                     </div>
 
                     <div className="d-flex align-items-center gap-3">
                         <FaCalendarCheck color="#E3A857" size={15} style={{ flexShrink: 0 }} />
-                        <span style={{ color: "#C4C7D6", fontSize: "14px" }}>Attendance and payroll, unified</span>
+                        <span style={{ color: "#E9E4D8", fontSize: "14px" }}>Attendance and payroll, unified</span>
                     </div>
 
                 </div>
@@ -194,7 +260,7 @@ function Login() {
             {/* Right form panel */}
             <div
                 className="d-flex flex-column justify-content-center align-items-center flex-grow-1"
-                style={{ background: "#FAFAFA", padding: "40px" }}
+                style={{ background: "#FFFDF7", padding: "40px" }}
             >
 
                 <div style={{ width: "100%", maxWidth: "380px" }}>
@@ -211,7 +277,7 @@ function Login() {
                         Welcome back
                     </h2>
 
-                    <p style={{ color: "#8B90A8", fontSize: "14px", marginBottom: "28px" }}>
+                    <p style={{ color: "#8A7F63", fontSize: "14px", marginBottom: "28px" }}>
                         Sign in to continue to your dashboard
                     </p>
 
@@ -230,19 +296,19 @@ function Login() {
                         </div>
                     )}
 
-                    <label style={{ fontSize: "13px", fontWeight: 600, color: "#5A5E75", marginBottom: "6px", display: "block" }}>
+                    <label style={{ fontSize: "13px", fontWeight: 600, color: "#5C5440", marginBottom: "6px", display: "block" }}>
                         Email
                     </label>
 
                     <div style={{ position: "relative", marginBottom: "20px" }}>
                         <FaEnvelope
                             size={14}
-                            color="#9AA0C3"
+                            color="#C2A25F"
                             style={{ position: "absolute", top: "50%", left: "14px", transform: "translateY(-50%)" }}
                         />
                         <input
-                            className="form-control"
-                            style={{ paddingLeft: "40px", height: "46px" }}
+                            className="form-control login-input"
+                            style={{ paddingLeft: "40px", height: "46px", background: "#FFFCF2", border: "1px solid #EAE2C9" }}
                             placeholder="admin@nexushr.com"
                             name="email"
                             value={login.email}
@@ -252,20 +318,20 @@ function Login() {
                         />
                     </div>
 
-                    <label style={{ fontSize: "13px", fontWeight: 600, color: "#5A5E75", marginBottom: "6px", display: "block" }}>
+                    <label style={{ fontSize: "13px", fontWeight: 600, color: "#5C5440", marginBottom: "6px", display: "block" }}>
                         Password
                     </label>
 
                     <div style={{ position: "relative", marginBottom: "28px" }}>
                         <FaLock
                             size={14}
-                            color="#9AA0C3"
+                            color="#C2A25F"
                             style={{ position: "absolute", top: "50%", left: "14px", transform: "translateY(-50%)" }}
                         />
                         <input
                             type={showPassword ? "text" : "password"}
-                            className="form-control"
-                            style={{ paddingLeft: "40px", paddingRight: "40px", height: "46px" }}
+                            className="form-control login-input"
+                            style={{ paddingLeft: "40px", paddingRight: "40px", height: "46px", background: "#FFFCF2", border: "1px solid #EAE2C9" }}
                             placeholder="••••••••"
                             name="password"
                             value={login.password}
@@ -278,7 +344,7 @@ function Login() {
                             aria-label={showPassword ? "Hide password" : "Show password"}
                             style={{
                                 position: "absolute", top: "50%", right: "14px", transform: "translateY(-50%)",
-                                background: "none", border: "none", padding: 0, color: "#9AA0C3", cursor: "pointer"
+                                background: "none", border: "none", padding: 0, color: "#C2A25F", cursor: "pointer"
                             }}
                         >
                             {showPassword ? <FaEyeSlash size={14} /> : <FaEye size={14} />}
@@ -290,7 +356,7 @@ function Login() {
                         style={{
                             height: "46px",
                             background: "#1B1F3B",
-                            color: "#fff",
+                            color: "#FDF6E3",
                             border: "none",
                             opacity: loading ? 0.7 : 1
                         }}
@@ -300,7 +366,7 @@ function Login() {
                         {loading ? "Signing in..." : "Login"}
                     </button>
 
-                    <p className="text-center mt-4" style={{ fontSize: "12px", color: "#B4B2A9" }}>
+                    <p className="text-center mt-4" style={{ fontSize: "12px", color: "#B8AD8E" }}>
                         NexusHR · Enterprise HR Management System
                     </p>
 
