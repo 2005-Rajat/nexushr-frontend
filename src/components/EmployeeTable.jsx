@@ -1,165 +1,251 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+import { FaEye, FaEdit, FaTrash } from "react-icons/fa";
 
-import Sidebar, { SIDEBAR_WIDTH } from "../components/Sidebar";
-import Navbar from "../components/Navbar";
-import DashboardCards from "../components/DashboardCards";
-import EmployeeTable from "../components/EmployeeTable";
-import Charts from "../components/Charts";
-import EmployeeModal from "../components/modals/EmployeeModal";
+import ViewEmployeeModal from "./modals/ViewEmployeeModal";
+import EditEmployeeModal from "./modals/EditEmployeeModal";
+import DeleteConfirmModal from "./modals/DeleteConfirmModal";
 
-import API from "../services/api";
+const PAGE_SIZE = 10;
 
-function Dashboard() {
+function EmployeeTable({ employees = [], loadEmployees }) {
 
-    const [employees, setEmployees] = useState([]);
-    const [filteredEmployees, setFilteredEmployees] = useState([]);
-    const [search, setSearch] = useState("");
-    const [departmentFilter, setDepartmentFilter] = useState("All");
-    const [statusFilter, setStatusFilter] = useState("All");
-    const [showModal, setShowModal] = useState(false);
-    const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [selectedEmployee, setSelectedEmployee] = useState(null);
+  const [showView, setShowView] = useState(false);
+  const [showEdit, setShowEdit] = useState(false);
+  const [showDelete, setShowDelete] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
 
-    useEffect(() => {
-        loadEmployees();
-    }, []);
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [employees]);
 
-    useEffect(() => {
+  const openView = (emp) => {
+    setSelectedEmployee(emp);
+    setShowView(true);
+  };
 
-        let result = employees.filter((emp) =>
-            emp.name.toLowerCase().includes(search.toLowerCase()) ||
-            emp.employeeId.toLowerCase().includes(search.toLowerCase()) ||
-            emp.email.toLowerCase().includes(search.toLowerCase())
-        );
+  const openEdit = (emp) => {
+    setSelectedEmployee(emp);
+    setShowEdit(true);
+  };
 
-        if (departmentFilter !== "All") {
-            result = result.filter((emp) => emp.department === departmentFilter);
-        }
+  const openDelete = (emp) => {
+    setSelectedEmployee(emp);
+    setShowDelete(true);
+  };
 
-        if (statusFilter !== "All") {
-            result = result.filter((emp) => (emp.status || "Active") === statusFilter);
-        }
+  const statusStyle = (status) => {
+    if (status === "On Leave") return { background: "rgba(224,168,69,0.15)", color: "#A67519" };
+    if (status === "Resigned") return { background: "rgba(139,143,163,0.15)", color: "#6B6F82" };
+    return { background: "rgba(76,175,125,0.12)", color: "#2F8558" };
+  };
 
-        setFilteredEmployees(result);
+  const actionBtn = (bg, color) => ({
+    background: bg,
+    color: color,
+    border: "none",
+    width: "32px",
+    height: "32px",
+    borderRadius: "8px",
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    marginRight: "6px",
+    cursor: "pointer",
+    transition: "transform 0.15s ease"
+  });
 
-    }, [search, departmentFilter, statusFilter, employees]);
+  const totalPages = Math.max(1, Math.ceil(employees.length / PAGE_SIZE));
+  const startIndex = (currentPage - 1) * PAGE_SIZE;
+  const paginatedEmployees = employees.slice(startIndex, startIndex + PAGE_SIZE);
 
-    const loadEmployees = async () => {
+  const goToPage = (page) => {
+    if (page < 1 || page > totalPages) return;
+    setCurrentPage(page);
+  };
 
-        try {
+  return (
 
-            const response = await API.get("/employees");
+    <div className="card mt-4" style={{ overflow: "hidden" }}>
 
-            setEmployees(response.data);
+      <div
+              className="d-flex justify-content-between align-items-center"
+              style={{
+                background: "#8458B3",
+                padding: "18px 24px"
+              }}
+          >
+        <h5 style={{ color: "#fff", margin: 0, fontWeight: 700 }}>Employee Records</h5>
+        <small style={{ color: "#C4C7D6" }}>{employees.length} total</small>
+      </div>
 
-        } catch (error) {
+      <div className="table-responsive">
 
-            console.log(error);
+        <table className="table table-hover align-middle mb-0">
 
-        }
+          <thead style={{ background: "#F8F7FC" }}>
 
-    };
+            <tr>
+              <th style={{ color: "#6B6F82", fontSize: "13px", fontWeight: 600 }}>ID</th>
+              <th style={{ color: "#6B6F82", fontSize: "13px", fontWeight: 600 }}>Employee ID</th>
+              <th style={{ color: "#6B6F82", fontSize: "13px", fontWeight: 600 }}>Name</th>
+              <th style={{ color: "#6B6F82", fontSize: "13px", fontWeight: 600 }}>Email</th>
+              <th style={{ color: "#6B6F82", fontSize: "13px", fontWeight: 600 }}>Department</th>
+              <th style={{ color: "#6B6F82", fontSize: "13px", fontWeight: 600 }}>Designation</th>
+              <th style={{ color: "#6B6F82", fontSize: "13px", fontWeight: 600 }}>Salary</th>
+              <th style={{ color: "#6B6F82", fontSize: "13px", fontWeight: 600 }}>Status</th>
+              <th style={{ color: "#6B6F82", fontSize: "13px", fontWeight: 600 }}>Actions</th>
+            </tr>
 
-    const departments = ["All", ...new Set(employees.map((emp) => emp.department).filter(Boolean))];
+          </thead>
 
-    return (
+          <tbody>
 
-        <>
-            <Sidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
+            {paginatedEmployees.length > 0 ? (
 
-            <div
-                style={{
-                    marginLeft: isSidebarOpen ? `${SIDEBAR_WIDTH}px` : "0px",
-                    background: "#FFFDF7",
-                    minHeight: "100vh",
-                    transition: "margin-left 0.25s ease"
-                }}
-            >
+              paginatedEmployees.map((emp) => (
 
-                <Navbar />
+                <tr key={emp.id}>
 
-                <div className="container-fluid p-4">
+                  <td className="font-mono" style={{ color: "#9B9FB0" }}>{emp.id}</td>
 
-                    <DashboardCards employees={employees} />
+                  <td className="font-mono" style={{ fontWeight: 600 }}>{emp.employeeId}</td>
 
-                    <div className="d-flex justify-content-between align-items-center mt-4 mb-4">
+                  <td style={{ fontWeight: 600, color: "#494D5F" }}>{emp.name}</td>
 
-                        <h3 className="fw-bold">
-                            Employee Management
-                        </h3>
+                  <td style={{ color: "#6B6F82" }}>{emp.email}</td>
 
-                        <button
-                            className="btn btn-primary px-4"
-                            onClick={() => setShowModal(true)}
-                        >
-                            + Add Employee
-                        </button>
+                  <td>{emp.department}</td>
 
-                    </div>
+                  <td>{emp.designation}</td>
 
-                    <div className="row g-3 mb-4">
+                  <td className="font-mono" style={{ fontWeight: 600 }}>₹ {emp.salary}</td>
 
-                        <div className="col-md-6">
-                            <input
-                                className="form-control"
-                                placeholder="🔍 Search by Name, Employee ID or Email..."
-                                value={search}
-                                onChange={(e) => setSearch(e.target.value)}
-                            />
-                        </div>
+                  <td>
+                    <span className="badge" style={statusStyle(emp.status)}>
+                      {emp.status || "Active"}
+                    </span>
+                  </td>
 
-                        <div className="col-md-3">
-                            <select
-                                className="form-select"
-                                value={departmentFilter}
-                                onChange={(e) => setDepartmentFilter(e.target.value)}
-                            >
-                                {departments.map((dept) => (
-                                    <option key={dept} value={dept}>
-                                        {dept === "All" ? "All Departments" : dept}
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
+                  <td>
 
-                        <div className="col-md-3">
-                            <select
-                                className="form-select"
-                                value={statusFilter}
-                                onChange={(e) => setStatusFilter(e.target.value)}
-                            >
-                                <option value="All">All Status</option>
-                                <option value="Active">Active</option>
-                                <option value="On Leave">On Leave</option>
-                                <option value="Resigned">Resigned</option>
-                            </select>
-                        </div>
+                    <button
+                      style={actionBtn("#EAF4FB", "#3B82A6")}
+                      onClick={() => openView(emp)}
+                    >
+                      <FaEye size={13} />
+                    </button>
 
-                    </div>
+                    <button
+                      style={actionBtn("#F3ECFB", "#8458B3")}
+                      onClick={() => openEdit(emp)}
+                    >
+                      <FaEdit size={13} />
+                    </button>
 
-                    <EmployeeTable
-                        employees={filteredEmployees}
-                        loadEmployees={loadEmployees}
-                    />
+                    <button
+                      style={actionBtn("#FBEAEA", "#D14343")}
+                      onClick={() => openDelete(emp)}
+                    >
+                      <FaTrash size={13} />
+                    </button>
 
-                    <div className="mt-5">
+                  </td>
 
-                        <Charts employees={employees} />
+                </tr>
 
-                    </div>
+              ))
 
-                    <EmployeeModal
-                        show={showModal}
-                        handleClose={() => setShowModal(false)}
-                        loadEmployees={loadEmployees}
-                    />
+            ) : (
 
-                </div>
+              <tr>
 
-            </div>
+                <td colSpan="9" className="text-center py-4" style={{ color: "#9B9FB0" }}>
 
-        </>
-    );
+                  No Employees Found
+
+                </td>
+
+              </tr>
+
+            )}
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+      {totalPages > 1 && (
+
+        <div className="d-flex justify-content-between align-items-center" style={{ padding: "16px 24px", borderTop: "1px solid #EEF0F8" }}>
+
+          <small style={{ color: "#9B9FB0" }}>
+            Page {currentPage} of {totalPages}
+          </small>
+
+          <nav>
+            <ul className="pagination pagination-sm mb-0">
+
+              <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
+                <button className="page-link" onClick={() => goToPage(currentPage - 1)}>
+                  Previous
+                </button>
+              </li>
+
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                <li key={page} className="page-item">
+                  <button
+                    className="page-link"
+                    onClick={() => goToPage(page)}
+                    style={
+                      currentPage === page
+                        ? { background: "#8458B3", borderColor: "#8458B3", color: "#fff" }
+                        : {}
+                    }
+                  >
+                    {page}
+                  </button>
+                </li>
+              ))}
+
+              <li className={`page-item ${currentPage === totalPages ? "disabled" : ""}`}>
+                <button className="page-link" onClick={() => goToPage(currentPage + 1)}>
+                  Next
+                </button>
+              </li>
+
+            </ul>
+          </nav>
+
+        </div>
+
+      )}
+
+      <ViewEmployeeModal
+        show={showView}
+        handleClose={() => setShowView(false)}
+        employee={selectedEmployee}
+      />
+
+      <EditEmployeeModal
+        show={showEdit}
+        handleClose={() => setShowEdit(false)}
+        employee={selectedEmployee}
+        loadEmployees={loadEmployees}
+      />
+
+      <DeleteConfirmModal
+        show={showDelete}
+        handleClose={() => setShowDelete(false)}
+        employee={selectedEmployee}
+        loadEmployees={loadEmployees}
+      />
+
+    </div>
+
+  );
 
 }
 
-export default Dashboard;
+export default EmployeeTable;
