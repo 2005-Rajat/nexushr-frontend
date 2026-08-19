@@ -1,6 +1,6 @@
 import { FaBell, FaSearch, FaUserCircle } from "react-icons/fa";
 
-function Navbar() {
+function Navbar({ title = "NexusHR Dashboard" }) {
 
   return (
 
@@ -22,7 +22,7 @@ function Navbar() {
     >
 
       <h3 style={{ fontFamily: "'Plus Jakarta Sans', sans-serif", fontWeight: 700, color: "#1B1F3B", margin: 0 }}>
-        NexusHR Dashboard
+        {title}
       </h3>
 
       <div style={{ display: "flex", alignItems: "center", gap: "22px" }}>
